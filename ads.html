@@ -1,1 +1,378 @@
-code here
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Boosts - Miku Style</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(135deg, #1a0033 0%, #330066 50%, #1a0033 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated background elements */
+        body::before {
+            content: '';
+            position: fixed;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(147, 51, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 60px;
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.5)); }
+            to { filter: drop-shadow(0 0 20px rgba(255, 0, 255, 0.8)); }
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .product-card {
+            background: rgba(20, 0, 40, 0.6);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid rgba(147, 51, 234, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(147, 51, 234, 0.8);
+            box-shadow: 0 20px 40px rgba(147, 51, 234, 0.4);
+        }
+
+        .card-banner {
+            position: relative;
+            height: 250px;
+            background: linear-gradient(135deg, #9333ea 0%, #4f46e5 100%);
+            overflow: hidden;
+        }
+
+        .card-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.03) 4px),
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.03) 4px);
+            animation: scan 8s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
+        }
+
+        .status-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        .status-badge.out-of-stock {
+            background: rgba(220, 38, 38, 0.9);
+            color: white;
+        }
+
+        .status-badge.available {
+            background: rgba(34, 197, 94, 0.9);
+            color: white;
+        }
+
+        .smm-logo {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: white;
+            text-shadow: 0 0 10px rgba(147, 51, 234, 0.8);
+        }
+
+        .banner-title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-align: center;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            line-height: 1.2;
+        }
+
+        .card-content {
+            padding: 30px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #a0a0a0;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        .features li::before {
+            content: '✓';
+            color: #00ff88;
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+
+        .pricing-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(147, 51, 234, 0.3);
+        }
+
+        .price-label {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .best-value {
+            color: #00ff88;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-unavailable {
+            background: rgba(220, 38, 38, 0.2);
+            color: #ff6b6b;
+            border: 2px solid rgba(220, 38, 38, 0.5);
+            cursor: not-allowed;
+        }
+
+        .btn-purchase {
+            background: linear-gradient(135deg, #9333ea 0%, #4f46e5 100%);
+            color: white;
+            border: 2px solid transparent;
+        }
+
+        .btn-purchase:hover {
+            background: linear-gradient(135deg, #7c3aed 0%, #4338ca 100%);
+            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .coming-soon {
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .coming-soon-text {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .banner-title { font-size: 1.8rem; }
+            .coming-soon-text { font-size: 2rem; }
+            .products-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Server Boosts</h1>
+        
+        <div class="products-grid">
+            <!-- Product Card 1 -->
+            <div class="product-card">
+                <div class="card-banner">
+                    <div class="smm-logo">SMM<br>SERVER</div>
+                    <div class="status-badge out-of-stock">● Out of Stock</div>
+                    <div class="banner-title">SERVER<br>BOOSTS<br>1 MONTH</div>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">Server Boosts [1 Month]</h2>
+                    <ul class="features">
+                        <li>Instant Delivery</li>
+                        <li>Realistic profiles</li>
+                        <li>Lasts 28-31 days</li>
+                    </ul>
+                    <div class="pricing-section">
+                        <div>
+                            <div class="price-label">Starting from</div>
+                            <div class="price">$1.85</div>
+                        </div>
+                        <div class="best-value">📈 Best Value</div>
+                    </div>
+                    <button class="btn btn-unavailable">🛡️ Currently Unavailable</button>
+                </div>
+            </div>
+
+            <!-- Product Card 2 -->
+            <div class="product-card">
+                <div class="card-banner">
+                    <div class="smm-logo">SMM<br>SERVER</div>
+                    <div class="status-badge out-of-stock">● Out of Stock</div>
+                    <div class="banner-title">SERVER<br>BOOSTS<br>2 MONTHS</div>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">Server Boosts [2 Months]</h2>
+                    <ul class="features">
+                        <li>Instant Delivery</li>
+                        <li>Realistic profiles</li>
+                        <li>Lasts 2 months</li>
+                    </ul>
+                    <div class="pricing-section">
+                        <div>
+                            <div class="price-label">Starting from</div>
+                            <div class="price">$1.50</div>
+                        </div>
+                        <div class="best-value">📈 Best Value</div>
+                    </div>
+                    <button class="btn btn-unavailable">🛡️ Currently Unavailable</button>
+                </div>
+            </div>
+
+            <!-- Product Card 3 -->
+            <div class="product-card">
+                <div class="card-banner">
+                    <div class="smm-logo">SMM<br>SERVER</div>
+                    <div class="status-badge available">● 77 Available</div>
+                    <div class="banner-title">SERVER<br>BOOSTS<br>3 MONTHS</div>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">Server Boosts [3 Months]</h2>
+                    <ul class="features">
+                        <li>Instant Delivery</li>
+                        <li>Realistic profiles</li>
+                        <li>Lasts 3 months</li>
+                    </ul>
+                    <div class="pricing-section">
+                        <div>
+                            <div class="price-label">Starting from</div>
+                            <div class="price">$2.85</div>
+                        </div>
+                        <div class="best-value">📈 Best Value</div>
+                    </div>
+                    <button class="btn btn-purchase">⚡ Purchase Now →</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="coming-soon">
+            <div class="coming-soon-text">MORE COMING SOON</div>
+        </div>
+    </div>
+</body>
+</html>
