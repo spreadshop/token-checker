@@ -106,6 +106,7 @@
 
         .check {
             color: #10b981;
+            font-size: 0.9rem;
         }
 
         .pricing-footer {
@@ -153,6 +154,14 @@
             box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
         }
 
+        .coming-soon {
+            text-align: center;
+            margin-top: 3rem;
+            font-size: 1.5rem;
+            color: #60a5fa;
+            font-weight: 600;
+        }
+
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
             .pricing-grid { grid-template-columns: 1fr; }
@@ -170,31 +179,32 @@
         <!-- Cards will be inserted here -->
     </div>
 
+    <div class="coming-soon">
+        More Coming Soon...
+    </div>
+
     <script>
         const products = [
             {
-                title: 'Server Boosts [1 Month]',
+                title: 'Discord Token Checker',
                 image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=200&fit=crop',
-                features: ['Instant Delivery', 'Realistic profiles', 'Lasts 28-31 days'],
-                price: '$1.42'
+                features: ['Check Nitro Tokens', 'Checks Age', 'Support Proxies'],
+                price: '$2',
+                link: 'https://your-link-here.com/server-boosts'
             },
             {
-                title: 'Online Members',
+                title: 'Discord Password Checker',
                 image: 'https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=400&h=200&fit=crop',
-                features: ['Instant Delivery', 'Realistic profiles', 'Warranty as long as subscription active'],
-                price: '$0.01'
+                features: ['Custom Password', 'Proxyless', 'Very Fast'],
+                price: '$2',
+                link: 'https://your-link-here.com/online-members'
             },
             {
-                title: 'Offline Members',
-                image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=400&h=200&fit=crop',
+                title: 'Boost Bot',
+                image: 'https://imgur.com/gallery/now-its-time-upvote-hypno-greatest-luck-new-2026-year-LiBoG0K',
                 features: ['Instant Delivery', 'Realistic profiles', '30 Days Warranty'],
-                price: '$0.01'
-            },
-            {
-                title: 'NFT Online Members',
-                image: 'https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=400&h=200&fit=crop',
-                features: ['Instant Delivery', 'Online Members with NFT profiles', 'Warranty as long as subscription active'],
-                price: '$0.01'
+                price: '$5',
+                link: 'https://your-link-here.com/offline-members'
             }
         ];
 
@@ -221,9 +231,11 @@
                                 <i class="fa-solid fa-arrow-trend-up"></i> Best Value
                             </div>
                         </div>
-                        <button class="btn-purchase">
-                            <i class="fa-solid fa-bolt"></i> Purchase Now
-                        </button>
+                        <a href="${product.link}" target="_blank" style="text-decoration: none;">
+                            <button class="btn-purchase">
+                                <i class="fa-solid fa-bolt"></i> Purchase Now
+                            </button>
+                        </a>
                     </div>
                 </div>
             `;
