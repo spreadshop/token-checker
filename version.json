@@ -1,3 +1,10 @@
 {
-  "version": "1.0.1"
+  "_comment": "Remote version & asset configuration",
+
+  "version": "1.0.1",
+
+  "images": {
+    "webhook-logo": "https://cdn.discordapp.com/attachments/1456550761033891882/1456553530767835146/4953-aesthetic-hatsune-miku-pfp.png?ex=6958c8af&is=6957772f&hm=72b717c58614c5fe106b5c1690afa572d04ca6c1f03e1a607a90a866976ebf6d",
+    "small-webhook-logo": "https://cdn.discordapp.com/attachments/1456550761033891882/1456557057250431097/small.png?ex=6958cbf7&is=69577a77&hm=c50ae07fa32bf7a1a285ef7a825c2e7bce5350ed75373ccbc9ced789a016cf3c"
+  }
 }
